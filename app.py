@@ -91,7 +91,7 @@ def robot_image(data):
     :param data:
     """
     # Forward latest camera image
-    socketio.emit('updated_image', data, room='clients')
+    socketio.emit('updated_image', data=data, room='clients')
 
 
 if __name__ == '__main__':

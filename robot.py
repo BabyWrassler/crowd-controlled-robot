@@ -50,9 +50,9 @@ DIRECTIONS = {
 }
 
 # Initialize motors, and define left and right controllers.
-motor_hat = Adafruit_MotorHAT(addr=0x6f)
-left_motor = motor_hat.getMotor(1)
-right_motor = motor_hat.getMotor(2)
+##motor_hat = Adafruit_MotorHAT(addr=0x6f)
+##left_motor = motor_hat.getMotor(1)
+##right_motor = motor_hat.getMotor(2)
 
 
 def turnOffMotors():
@@ -160,7 +160,7 @@ def calculate_average_instruction():
         }
 
 
-def control_robot(control):
+def NOT_control_robot(control):
     """
     Takes current robot control instructions and apply to the motors.
     If direction is None, all-stop, otherwise calculates a speed
@@ -187,7 +187,8 @@ def control_robot(control):
     right_speed = int(right[1] * magnitude * SPEED_MULTIPLIER)
     right_speed = min(right_speed, 255)
     right_motor.setSpeed(right_speed)
-
+def control_robot(control):
+    pass
 
 def on_new_instruction(message):
     """
@@ -210,15 +211,20 @@ def streaming_worker():
     """
     camera = PiCamera()
     camera.resolution = (200, 300)
-    camera.framerate = CAMERA_FPS
+    camera.framerate = CAMERA_FPS # 5
 
-    with BytesIO() as stream, SocketIO('https://kropbot.herokuapp.com', 443) as socketIO:
+    with BytesIO() as stream, SocketIO('https://crowd-controlled-robot.herokuapp.com', 443) as socketIO:
         # capture_continuous is an endless iterator. Using video port + low quality for speed.
         for _ in camera.capture_continuous(stream, format='jpeg', use_video_port=True, quality=CAMERA_QUALITY):
             stream.truncate()
             stream.seek(0)
             data = stream.read()
-            socketIO.emit('robot_image_' + robot_ws_secret, bytearray(data))
+            #print(bytearray(data))
+            socketIO.emit('robot_image_' + robot_ws_secret, data=bytearray(data)) ##This line has a problem - Jeff
+##            socketIO.emit('robot_image_' + robot_ws_secret, data) ##This line has a problem - Jeff
+## TypeError: Object of type bytearray is not JSON serializable
+##            socketIO.emit('robot_image_' + robot_ws_secret, bytearray(data, encoding="utf-8"))
+##            socketIO.emit('robot_image_' + robot_ws_secret, bytes(data))
             stream.seek(0)
 
 
@@ -230,7 +236,7 @@ if __name__ == "__main__":
         # This runs continuously until exit.
         future = executor.submit(streaming_worker)
 
-        with SocketIO('https://kropbot.herokuapp.com', 443) as socketIO:
+        with SocketIO('https://crowd-controlled-robot.herokuapp.com', 443) as socketIO:
             while True:
                 current_time = time.time()
                 lock_time = current_time + 1.0 / UPDATES_PER_SECOND
