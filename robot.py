@@ -218,7 +218,7 @@ def streaming_worker():
             stream.truncate()
             stream.seek(0)
             data = stream.read()
-            socketIO.emit('robot_image_' + robot_ws_secret, bytearray(data))
+            socketIO.emit('robot_image_' + robot_ws_secret, data=bytearray(data))
             stream.seek(0)
 
 
