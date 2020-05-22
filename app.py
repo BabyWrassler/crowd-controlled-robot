@@ -77,7 +77,7 @@ def robot_update(message):
     :return: list of directions (all clients)
     """
     # Forward latest state to clients.
-    socketio.emit('updated_status', message, json=True, room='clients')
+    socketio.emit('updated_status', data=message, json=True, room='clients')
     # Clear expired instructions and return the remainder to the robot.
     clear_expired_instructions()
     return [v['direction'] for v in instruction_buffer.values()]
@@ -91,7 +91,7 @@ def robot_image(data):
     :param data:
     """
     # Forward latest camera image
-    socketio.emit('updated_image', data, room='clients')
+    socketio.emit('updated_image', data=data, room='clients')
 
 
 if __name__ == '__main__':
