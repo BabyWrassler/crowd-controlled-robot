@@ -212,7 +212,7 @@ def streaming_worker():
     camera.resolution = (200, 300)
     camera.framerate = CAMERA_FPS
 
-    with BytesIO() as stream, SocketIO('https://kropbot.herokuapp.com', 443) as socketIO:
+    with BytesIO() as stream, SocketIO('https://crowd-controlled-robot.herokuapp.com', 443) as socketIO:
         # capture_continuous is an endless iterator. Using video port + low quality for speed.
         for _ in camera.capture_continuous(stream, format='jpeg', use_video_port=True, quality=CAMERA_QUALITY):
             stream.truncate()
@@ -230,7 +230,7 @@ if __name__ == "__main__":
         # This runs continuously until exit.
         future = executor.submit(streaming_worker)
 
-        with SocketIO('https://kropbot.herokuapp.com', 443) as socketIO:
+        with SocketIO('https://crowd-controlled-robot.herokuapp.com', 443) as socketIO:
             while True:
                 current_time = time.time()
                 lock_time = current_time + 1.0 / UPDATES_PER_SECOND
