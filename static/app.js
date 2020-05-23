@@ -42,6 +42,7 @@ robotApp.controller('RobotController', function ($scope, $http, $interval, socke
         $scope.data.magnitude = data.magnitude;
         $scope.data.n_controllers = data.n_controllers
         $scope.data.total_counts = data.total_counts;
+        console.log("Updated status. Jeff")
       });
 
     // Receive updated signal via socket and apply data
