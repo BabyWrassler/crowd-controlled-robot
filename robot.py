@@ -211,7 +211,7 @@ def streaming_worker():
     """
     camera = PiCamera()
     camera.resolution = (200, 300)
-    camera.framerate = CAMERA_FPS # 5
+    camera.framerate = CAMERA_FPS
 
     with BytesIO() as stream, SocketIO('https://crowd-controlled-robot.herokuapp.com', 443) as socketIO:
         # capture_continuous is an endless iterator. Using video port + low quality for speed.
@@ -219,12 +219,7 @@ def streaming_worker():
             stream.truncate()
             stream.seek(0)
             data = stream.read()
-            #print(bytearray(data))
-            socketIO.emit('robot_image_' + robot_ws_secret, data=bytearray(data)) ##This line has a problem - Jeff
-##            socketIO.emit('robot_image_' + robot_ws_secret, data) ##This line has a problem - Jeff
-## TypeError: Object of type bytearray is not JSON serializable
-##            socketIO.emit('robot_image_' + robot_ws_secret, bytearray(data, encoding="utf-8"))
-##            socketIO.emit('robot_image_' + robot_ws_secret, bytes(data))
+            socketIO.emit('robot_image_' + robot_ws_secret, data=bytearray(data))
             stream.seek(0)
 
 
