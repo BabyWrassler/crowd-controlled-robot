@@ -1,3 +1,4 @@
+console.log("top of app.js")
 var robotApp = angular.module('robotApp', []);
 robotApp.controller('RobotController', function ($scope, $http, $interval, socket) {
 
