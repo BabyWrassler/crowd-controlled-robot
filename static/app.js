@@ -1,4 +1,4 @@
-console.log("top of app.js")
+console.log("top of app.js");
 var robotApp = angular.module('robotApp', []);
 robotApp.controller('RobotController', function ($scope, $http, $interval, socket) {
 
@@ -44,14 +44,14 @@ robotApp.controller('RobotController', function ($scope, $http, $interval, socke
         $scope.data.magnitude = data.magnitude;
         $scope.data.n_controllers = data.n_controllers
         $scope.data.total_counts = data.total_counts;
-        console.log("Updated status. Jeff")
+        console.log("Updated status. Jeff");
       });
 
     // Receive updated signal via socket and apply data
     socket.on('updated_image', function (data) {
         blob = new Blob([data], {type: "image/jpeg"});
         $scope.data.imageUrl = window.URL.createObjectURL(blob);
-        console.log("Updated image to url. Jeff")
+        console.log("Updated image to url. Jeff");
       });
 
 
