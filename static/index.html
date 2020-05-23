@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title from Pi</title>
+    <title>Marbot</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
@@ -18,7 +18,8 @@
 
     <form name="rc" action="#" ng-controller="RobotController">
 
-        <img data-ng-src="{{data.imageUrl}}" class="camera" width=640 height=480>
+        <img data-ng-src="{{data.imageUrl}}" class="camera">
+        <img data-ng-src="{{"http://www.jeffhighsmith.com/wp-content/uploads/2016/11/Morse-Riddler-Closeup.jpg"}}" class="camera" width=640 height=480>
         <div class="control-counter">{{data.n_controllers}}<br/><small>controllers</small></div>
         <div class="controls">
             <span ng-repeat="i in directions" ng-click="set_direction(i)" class="dir-button counter-{{ min(data.total_counts[i],9) }} dir-{{i}}" ng-class="{selected: data.selected == i, direction: data.direction == i && data.magnitude != 0 }">⬆</span>
