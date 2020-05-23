@@ -48,6 +48,7 @@ robotApp.controller('RobotController', function ($scope, $http, $interval, socke
     socket.on('updated_image', function (data) {
         blob = new Blob([data], {type: "image/jpeg"});
         $scope.data.imageUrl = window.URL.createObjectURL(blob);
+        console.log("Updated image to url")
       });
 
 
