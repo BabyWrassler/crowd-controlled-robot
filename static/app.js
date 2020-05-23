@@ -20,6 +20,7 @@ robotApp.controller('RobotController', function ($scope, $http, $interval, socke
     $scope.min = window.Math.min;
 
     socket.emit('client_ready');
+    console.log("client_ready. Jeff")
 
     $scope.set_direction = function(i) {
         $scope.data.selected = i;
@@ -49,7 +50,7 @@ robotApp.controller('RobotController', function ($scope, $http, $interval, socke
     socket.on('updated_image', function (data) {
         blob = new Blob([data], {type: "image/jpeg"});
         $scope.data.imageUrl = window.URL.createObjectURL(blob);
-        console.log("Updated image to url")
+        console.log("Updated image to url. Jeff")
       });
 
 
