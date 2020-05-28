@@ -20,7 +20,7 @@ latest_robot_state = {}
 
 INSTRUCTION_DURATION = 3
 
-print('print test, top of file, Jeff')
+#print('print test, top of file, Jeff')
 
 @app.route('/')
 def index():
