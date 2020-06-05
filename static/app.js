@@ -54,6 +54,9 @@ robotApp.controller('RobotController', function ($scope, $http, $interval, socke
         $scope.data.imageUrl = window.URL.createObjectURL(blob);
       });
 
+    socket.on("connection", io=>{
+        console.log("Client connected!",io.id);
+    })
 
  });
 
