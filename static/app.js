@@ -1,4 +1,4 @@
-console.log("top of app.js");
+console.log("Top of app.js");
 var robotApp = angular.module('robotApp', []);
 robotApp.controller('RobotController', function ($scope, $http, $interval, socket) {
 
@@ -54,8 +54,8 @@ robotApp.controller('RobotController', function ($scope, $http, $interval, socke
         $scope.data.imageUrl = window.URL.createObjectURL(blob);
       });
 
-    socket.on("connection", io=>{
-        console.log("Client connected!",io.id);
+    socket.on("connection", function() {
+        console.log("Client connected!");
     })
 
  });
