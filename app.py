@@ -93,6 +93,7 @@ def robot_image(data):
     """
     # Forward latest camera image
     socketio.emit('updated_image', data=data, room='clients')
+    return 'robot image in app.py'
 
 
 if __name__ == '__main__':
